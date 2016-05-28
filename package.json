@@ -1,10 +1,11 @@
 {
   "name": "portal-im",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A quick and simple IM server",
   "main": "portal.js",
   "scripts": {
-    "test": "echo \"No test... yet.\""
+    "test": "echo \"No test... yet.\"",
+    "start": "node portal.js"
   },
   "repository": {
     "type": "git",
