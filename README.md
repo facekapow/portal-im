@@ -1,6 +1,8 @@
 # portal-im
 A quick and simple IM server
 
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+
 ## Install
 
 ```bash
