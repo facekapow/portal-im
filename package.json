@@ -1,6 +1,6 @@
 {
   "name": "portal-im",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A quick and simple IM server",
   "main": "portal.js",
   "scripts": {
