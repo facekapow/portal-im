@@ -1,0 +1,39 @@
+{
+  "name": "portal-im",
+  "version": "1.0.0",
+  "description": "A quick and simple IM server",
+  "main": "portal.js",
+  "scripts": {
+    "test": "echo \"No test... yet.\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/facekapow/portal-im.git"
+  },
+  "keywords": [
+    "portal",
+    "im",
+    "instant",
+    "message",
+    "chat",
+    "server",
+    "social"
+  ],
+  "author": "facekapow",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/facekapow/portal-im/issues"
+  },
+  "homepage": "https://github.com/facekapow/portal-im#readme",
+  "dependencies": {
+    "colors": "^1.1.2",
+    "mini-file": "0.0.19",
+    "mini-route": "0.0.4",
+    "minimist": "^1.2.0",
+    "power-object": "^1.0.0",
+    "redis": "^2.6.0-1",
+    "socket.io": "^1.4.5"
+  },
+  "bin": "portal.js",
+  "preferGlobal": true
+}

@@ -1,0 +1,31 @@
+<!doctype html>
+
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>portal.im</title>
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+    <link href="/deps/simple-css/simple.css" rel="stylesheet" type="text/css"/>
+    <link href="/style.css" rel="stylesheet" type="text/css"/>
+  </head>
+  <body>
+    <div id="pageNav"></div>
+    <img id="handle" src="assets/handle.png">
+    <div id="overlay"></div>
+    <script src="/loadNav.js"></script>
+    <div id="pageCont"></div>
+    <script src="/loadContent.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      window.portal = io();
+      if (window.location.hash.substr(1) !== '') {
+        window.loadPageContent(window.location.hash.substr(1));
+      } else {
+        window.location.hash = '#index';
+      }
+    </script>
+  </body>
+</html>

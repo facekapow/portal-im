@@ -1,0 +1,30 @@
+{
+  "name": "portal-im",
+  "description": "A quick and simple IM server",
+  "main": "portal.js",
+  "authors": [
+    "facekapow"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "portal",
+    "im",
+    "instant",
+    "message",
+    "chat",
+    "server",
+    "social"
+  ],
+  "homepage": "https://facekapow.github.io/portal-im",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "simple-css": "^1.0.0"
+  }
+}

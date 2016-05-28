@@ -1,0 +1,27 @@
+{
+  "name": "simple-css",
+  "authors": [
+    "Face Kapow <facekapow@earthlink.net>"
+  ],
+  "description": "An extremely simple CSS3 style template for a modern look.",
+  "main": "simple.css",
+  "keywords": [
+    "simple",
+    "stylesheet",
+    "css",
+    "theme",
+    "template",
+    "modern",
+    "css3",
+    "simple-css"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/facekapow/simple-css",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
