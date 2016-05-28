@@ -9,6 +9,7 @@ const socketIo = require('socket.io');
 const PowerObject = require('power-object');
 const clean = require('./shared-script/clean');
 const EventEmitter = require('events');
+const port = process.env.PORT || 80;
 
 module.exports.events = new EventEmitter();
 
@@ -118,8 +119,8 @@ io.on('connection', (portal) => {
   });
 });
 
-server.listen(80, () => {
-  console.log('listening on ::80');
+server.listen(port, () => {
+  console.log(`listening on ::${port}...`);
   console.log(`Chat admin token: ${adminToken}`);
   module.exports.events.emit('listening', adminToken);
 });
