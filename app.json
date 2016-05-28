@@ -1,0 +1,7 @@
+{
+  "name": "portal-im",
+  "description": "A quick and simple IM server",
+  "repository": "https://github.com/facekapow/portal-im",
+  "logo": "https://cdn.rawgit.com/facekapow/portal-im/master/public/assets/portal.png",
+  "keywords": ["portal", "im", "messaging", "message", "chat", "portal-im", "server"]
+}
