@@ -5,7 +5,8 @@
   "main": "portal.js",
   "scripts": {
     "test": "echo \"No test... yet.\"",
-    "start": "node portal.js"
+    "start": "node portal.js",
+    "postinstall": "./node_modules/bower/bin/bower install"
   },
   "repository": {
     "type": "git",
@@ -27,6 +28,7 @@
   },
   "homepage": "https://github.com/facekapow/portal-im#readme",
   "dependencies": {
+    "bower": "^1.7.9",
     "colors": "^1.1.2",
     "mini-file": "0.0.19",
     "mini-route": "0.0.4",
