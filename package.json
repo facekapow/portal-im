@@ -37,6 +37,6 @@
   "bin": "portal.js",
   "preferGlobal": true,
   "engines": {
-    "node": "*"
+    "node": ">=6.x"
   }
 }
