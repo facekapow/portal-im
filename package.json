@@ -35,5 +35,8 @@
     "socket.io": "^1.4.5"
   },
   "bin": "portal.js",
-  "preferGlobal": true
+  "preferGlobal": true,
+  "engines": {
+    "node": "*"
+  }
 }
