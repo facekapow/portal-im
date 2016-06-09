@@ -1,6 +1,11 @@
+html {
+  height: 100%;
+}
+
 body {
   margin: 0px;
   font-family: 'Raleway';
+  height: 100%;
 }
 
 #pageCont {
@@ -28,13 +33,14 @@ body {
 
 #handle {
   display: block;
-  width: 25px;
-  height: 25px;
+  width: 35px;
+  height: 35px;
   cursor: pointer;
   z-index: 2;
   position: fixed;
   left: 3px;
   top: 3px;
+  box-shadow: none;
   -webkit-transition: filter 0.3s ease-in-out, -webkit-filter 0.3s ease-in-out;
   -o-transition: filter 0.3s ease-in-out, -webkit-filter 0.3s ease-in-out;
   -moz-transition: filter 0.3s ease-in-out, -webkit-filter 0.3s ease-in-out;

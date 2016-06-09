@@ -80,6 +80,7 @@
   });
   portal.on('severConnections', function(msg) {
     portal.close();
+    window.portalId = null;
     var info = 'You\'ve been disconnected from the server';
     if (msg) info += ' (' + msg + ')';
     showPopup(info);
