@@ -33,7 +33,16 @@
     popup.classList.remove('simple--popup-shown');
     overlay.classList.remove('simple--overlay-shown');
   }
-  function showPopup(info) {
+  function showPopup(info, cb) {
+    overlay.onclick = ok.onclick = function() {
+      popup.classList.remove('simple--popup-shown');
+      overlay.classList.remove('simple--overlay-shown');
+      cb();
+      overlay.onclick = ok.onclick = function() {
+        popup.classList.remove('simple--popup-shown');
+        overlay.classList.remove('simple--overlay-shown');
+      }
+    }
     info_elm.innerHTML = info;
     overlay.classList.add('simple--overlay-shown');
     popup.classList.add('simple--popup-shown');
@@ -83,7 +92,9 @@
     window.portalId = null;
     var info = 'You\'ve been disconnected from the server';
     if (msg) info += ' (' + msg + ')';
-    showPopup(info);
+    showPopup(info, function() {
+      window.location.hash = '#index';
+    });
   });
   input.onkeydown = function(e) {
     if (e.keyCode === 13) {
