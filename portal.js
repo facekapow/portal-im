@@ -6,7 +6,6 @@ const MiniRoute = require('mini-route');
 const miniFile = require('mini-file');
 const http = require('http');
 const socketIo = require('socket.io');
-const PowerObject = require('power-object');
 const clean = require('./shared-script/clean');
 const EventEmitter = require('events');
 const port = process.env.PORT || 80;
@@ -22,8 +21,8 @@ const router = new MiniRoute(server, {
   notFound: true
 });
 const io = socketIo(server);
-let users = new PowerObject(); // portal: username
-let portals = new PowerObject(); // username: portal
+let users = new Map(); // portal: username
+let portals = new Map(); // username: portal
 let latestMessages = [];
 const adminToken = new Buffer(String(Date.now())).toString('base64').substr(-7).replace(/(=)*$/, ''); // generate admin auth token
 
@@ -50,9 +49,9 @@ const commands = {
   ],
   'SEVER-CONNECTIONS': [
     (portal) => {
-      io.emit('severConnections');
-      users = new PowerObject();
-      portals = new PowerObject();
+      io.emit('severConnections', 'everyone was disconnected');
+      users = new Map();
+      portals = new Map();
       portal.emit('ADMIN--RESPONSE', true);
     },
     'Disconnects (severs) all active connections'
@@ -60,7 +59,7 @@ const commands = {
   'LIST-CONNECTIONS': [
     (portal) => {
       let str = '';
-      for (let username of portals.keys()) str += `${username} - ${portals.get(username).request.connection.remoteAddress}\n`;
+      for (let [username, portal] of portals) str += `${username} - ${portal.request.connection.remoteAddress}\n`;
       if (str === '') str = 'no active connections.';
       portal.emit('ADMIN--INFO', str.trim());
       portal.emit('ADMIN--RESPONSE', true);
@@ -72,13 +71,24 @@ const commands = {
       portal.emit('ADMIN--INFO', 'shutting down sever...');
       portal.emit('ADMIN--RESPONSE', true);
       portal.disconnect();
-      io.emit('severConnections');
-      users = new PowerObject;
-      portals = new PowerObject();
+      io.emit('severConnections', 'the server is shutting down');
+      users = new Map;
+      portals = new Map();
       latestMessages = [];
       server.close();
     },
     'Disconnects (severs) all connections and shuts down the server.'
+  ],
+  'KICK-USER': [
+    (portal, username) => {
+      if (portals.has(username)) {
+        portals.get(username).emit('severConnections', 'you were kicked');
+        portal.emit('ADMIN--RESPONSE', true);
+      } else {
+        portal.emit('ADMIN--RESPONSE', false, 'no such user(name).');
+      }
+    },
+    'Kicks the specified user (by username)'
   ]
 }
 
@@ -98,8 +108,8 @@ io.on('connection', (portal) => {
   });
   portal.on('disconnect', () => {
     if (!users.get(portal)) return;
-    portals.remove(users.get(portal));
-    users.remove(portal);
+    portals.delete(users.get(portal));
+    users.delete(portal);
     module.exports.events.emit('portal-closed');
   });
   portal.on('ADMIN--VERIFY-TOKEN', (token) => io.emit('ADMIN--VERIFIED', token === adminToken));
@@ -111,11 +121,11 @@ io.on('connection', (portal) => {
     }
     portal.emit('ADMIN--RETURN-COMMANDS', cmds);
   });
-  portal.on('ADMIN--COMMAND', (token, command) => {
+  portal.on('ADMIN--COMMAND', (token, command, ...args) => {
     if (token !== adminToken) return portal.emit('ADMIN--RESPONSE', false, 'Invalid token.');
     const cmd = commands[command];
     if (!cmd) return portal.emit('ADMIN--RESPONSE', false, 'Unknown command.');
-    cmd[0](portal);
+    cmd[0](portal, ...args);
   });
 });
 

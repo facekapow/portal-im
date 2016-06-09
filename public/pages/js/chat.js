@@ -29,6 +29,10 @@
     popup.classList.remove('simple--popup-shown');
     overlay.classList.remove('simple--overlay-shown');
   }
+  overlay.onclick = function() {
+    popup.classList.remove('simple--popup-shown');
+    overlay.classList.remove('simple--overlay-shown');
+  }
   function showPopup(info) {
     info_elm.innerHTML = info;
     overlay.classList.add('simple--overlay-shown');
@@ -59,14 +63,14 @@
   function removeIfTooLong() {
     if (chat.children.length > 60) chat.removeChild(chat.firstChild);
   }
-  /* for debugging only:
-  window.makeNode = makeNode;
+  // for debugging only:
+  /* window.makeNode = makeNode;
   window.addNode = addNode;
   addNode(makeNode('tutorial', 'Hello, world!'));
   setTimeout(function() {
     addNode(makeNode('tutorial', 'Hi there, and welcome!'));
-  }, 2000);
-  end debugging only */
+  }, 2000); */
+  // end debugging only
   portal.on('message', function(username, msg) {
     addNode(makeNode(username, msg));
     removeIfTooLong();
@@ -74,8 +78,11 @@
   portal.on('clearChat', function() {
     chat.innerHTML = '';
   });
-  portal.on('severConnections', function() {
+  portal.on('severConnections', function(msg) {
     portal.close();
+    var info = 'You\'ve been disconnected from the server';
+    if (msg) info += ' (' + msg + ')';
+    showPopup(info);
   });
   input.onkeydown = function(e) {
     if (e.keyCode === 13) {

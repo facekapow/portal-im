@@ -31,7 +31,6 @@
     "mini-file": "0.0.19",
     "mini-route": "0.0.4",
     "minimist": "^1.2.0",
-    "power-object": "^1.0.0",
     "redis": "^2.6.0-1",
     "socket.io": "^1.4.5"
   },
